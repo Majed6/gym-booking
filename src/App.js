@@ -24,7 +24,8 @@ function App() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [updateAppState]);
     const init = async () => {
-        const gymEvents = await (await fetch(`https://api.nylas.com/events?limit=5`, {
+        const dayStart = dayjs().startOf('day').unix();
+        const gymEvents = await (await fetch(`https://api.nylas.com/events?starts_after=${dayStart}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -12,12 +12,12 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run build
+          PUBLIC_URL=https://dee.codes/gym-booking npm run build
       - name: Deploy
         run: |
           git config --global user.name 'GitHub Actions'
           git config user.email github-actions@github.com
           git checkout -b gh-pages
-          git add -f build
+          git --work-tree build add --all
           git commit -m 'Deploy'
           git push -f origin gh-pages
