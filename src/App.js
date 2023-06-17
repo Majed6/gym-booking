@@ -71,7 +71,11 @@ function App() {
         })
             .then(response => response.json())
             .then(event => {
-                console.log(`Event created with ID: ${event.id}`);
+                updateAppState({
+                    ...appState,
+                    bookings: [...appState.bookings, dayjs(event.when.start_time * 1000).hour()],
+                    myHours: [...appState.myHours, dayjs(event.when.start_time * 1000).hour()]
+                })
             });
     }
     const theme = createTheme({
