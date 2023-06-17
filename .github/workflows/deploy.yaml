@@ -1,0 +1,23 @@
+name: "Deploy react app to GitHub Pages"
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+      - name: Deploy
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config user.email github-actions@github.com
+          git checkout -b gh-pages
+          git add -f build
+          git commit -m 'Deploy'
+          git push -f origin gh-pages
